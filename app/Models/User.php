@@ -13,6 +13,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Uuid, Notifiable;
 
+    const ADMIN_ROLE = 'admin';
+    const MANAGER_ROLE = 'manager';
+    const STAFF_ROLE = 'staff';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -43,4 +48,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Scope a query to only include admin role.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAdminRole($query)
+    {
+        return $query->where('role', self::ADMIN_ROLE);
+    }
+
+    /**
+     * Scope a query to only include manager role.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeManagerRole($query)
+    {
+        return $query->where('role', self::MANAGER_ROLE);
+    }
+
+    /**
+     * Scope a query to only include staff role.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeStaffRole($query)
+    {
+        return $query->where('role', self::STAFF_ROLE);
+    }
 }
