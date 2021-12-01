@@ -1,7 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+//use App\Http\Controllers\UserController;
 
+//Route::resource('users',UserController::class);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('users', 'App\Http\Controllers\Api\V1\UserController');
+Route::post('/users', [UserController::class,'store']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
