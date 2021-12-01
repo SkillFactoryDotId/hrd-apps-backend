@@ -10,13 +10,38 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->model = new User;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return User::all();
+        $data = $this->model;
+        if (isset($request->nomor_karyawan) && trim($request->nomor_karyawan) !== '') {
+            $data = $data->where('nomor_karyawan', 'LIKE', '%'.$request->nomor_karyawan.'%');
+        }
+        if (isset($request->name) && trim($request->name) !== '') {
+            $data = $data->where('name', 'LIKE', '%'.$request->name.'%');
+        }
+        if (isset($request->role) && trim($request->role) !== '') {
+            $data = $data->where('role', $request->role);
+        }
+        if ($request->has('order')) {
+            $data = $data->orderBy($request->input('order'), $request->input('ascending')? 'ASC' : 'DESC');
+        } else {
+            $data = $data->orderBy('nomor_karyawan', 'ASC');
+        }
+        return $data->paginate($request->limit? $request->limit : 10)->appends($request->all());
     }
 
     /**
@@ -36,7 +61,7 @@ class UserController extends Controller
             'role' => 'required',
         ]);
 
-        return User::create($request->all());
+        return $this->model->create($request->all());
     }
 
     /**
@@ -47,7 +72,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('users.show',compact('user'));
+        return $this->model->findOrFail($id);
     }
 
     /**
@@ -59,9 +84,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::find($id);
+        $user = $this->model->findOrFail($id);
         $user->update($request->all());
-        return $user;
+        return $user->refresh();
 
     }
 
@@ -73,6 +98,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return User::destroy($id);
+        return $this->model->destroy($id);
     }
 }
