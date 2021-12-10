@@ -40,15 +40,14 @@ class OauthController extends Controller
             
         ]);
 
-        $user = $this->model->findOrFail($request->user()->id);
-        $user->update([
+         $request->user()->update([
             
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'password' => !is_null($request->password) && $request->password !== '' ? Hash::make($request->password) : $user->password,
             
         ]);
-        return $user->refresh();
+        return $request->user()->refresh();
 
     }
 }
