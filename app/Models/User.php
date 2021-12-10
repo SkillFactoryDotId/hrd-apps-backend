@@ -16,6 +16,7 @@ class User extends Authenticatable
     const ADMIN_ROLE = 'admin';
     const MANAGER_ROLE = 'manager';
     const STAFF_ROLE = 'staff';
+    const HR_ROLE = 'hrd';
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +25,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'id_manager',
         'nomor_karyawan',
         'status',
         'name',
@@ -51,6 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'id' => 'string',
+        'id_manager' => 'string',
         'nomor_karyawan' => 'string',
         'status' => 'string',
         'name' => 'string',
@@ -92,5 +95,15 @@ class User extends Authenticatable
     public function scopeStaffRole($query)
     {
         return $query->where('role', self::STAFF_ROLE);
+    }
+    /**
+     * Scope a query to only include staff role.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHrRole($query)
+    {
+        return $query->where('role', self::HR_ROLE);
     }
 }
