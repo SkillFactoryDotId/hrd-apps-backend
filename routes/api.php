@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\OauthController;
 
 
 /*
@@ -16,13 +17,14 @@ use App\Http\Controllers\Api\V1\UserController;
 |
 */
 Route::prefix('v1')->middleware('api')->group(function () {
-    Route::apiResource('users', UserController::class);
-});
+    Route::middleware('auth:api')->group(function () {
+        Route::get('me' , [OauthController::class, 'me']);
+        Route::post('update-profile' , [OauthController::class, 'updateProfile']);
+        // Oauth 2.0
+        // https://laravel.com/docs/8.x/passport
 
-Route::get('users', 'UserController@index');
-Route::post('users', 'UserController@create');
-Route::get('/users/{id}', 'UserController@detail');
-Route::put('/users/{id}', 'UserController@update');
-Route::delete('/users/{id}', 'UserController@delete');
+        Route::apiResource('users', UserController::class);
+    });
+});
 
 ?>

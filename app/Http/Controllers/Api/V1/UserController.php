@@ -5,18 +5,45 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('role:admin|hrd');
+        $this->model = new User;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return User::all();
+        $data = $this->model;
+        if (isset($request->nomor_karyawan) && trim($request->nomor_karyawan) !== '') {
+            $data = $data->where('nomor_karyawan', 'LIKE', '%'.$request->nomor_karyawan.'%');
+        }
+        if (isset($request->name) && trim($request->name) !== '') {
+            $data = $data->where('name', 'LIKE', '%'.$request->name.'%');
+        }
+        if (isset($request->role) && trim($request->role) !== '') {
+            $data = $data->where('role', $request->role);
+        }
+        if ($request->has('order')) {
+            $data = $data->orderBy($request->input('order'), $request->input('ascending')? 'ASC' : 'DESC');
+        } else {
+            $data = $data->orderBy('nomor_karyawan', 'ASC');
+        }
+        return $data->paginate($request->limit? $request->limit : 10)->appends($request->all());
     }
 
     /**
@@ -27,16 +54,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // https://laravel.com/docs/8.x/validation
         $request->validate([
-            'nomor_karyawan' => 'required',
-            'status' => 'required',
+            'nomor_karyawan' => 'required|unique:users',
+            'status' => 'required|in:aktif,nonaktif',
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone_number' => 'required|unique:users|min:11',
+            'password' => 'required|min:6',
+            'id_manager' => 'required_if:role,'. User::STAFF_ROLE ,
             'role' => 'required',
         ]);
 
-        return User::create($request->all());
+        return $this->model->create([
+            'nomor_karyawan' => $request->nomor_karyawan,
+            'status' => $request->status,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make($request->password),
+            'id_manager' => $request->id_manager,
+            'role' => $request->role
+        ]);
     }
 
     /**
@@ -47,7 +86,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('users.show',compact('user'));
+        return $this->model->findOrFail($id);
     }
 
     /**
@@ -59,9 +98,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::find($id);
-        $user->update($request->all());
-        return $user;
+        $request->validate([
+            'nomor_karyawan' => [
+                'required',
+                Rule::unique('users')->ignore($id), // abaikan data user yang memiliki id == $id
+            ],
+            'status' => 'required|in:aktif,nonaktif',
+            'name' => 'required',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id), // abaikan data user yang memiliki id == $id
+            ],
+            'phone_number' => 'required',
+            'password' => 'nullable|min:6', // boleh kosong, tapi jika ada isi minimal 6 karakter
+            'id_manager' => 'required_if:role,'. User::STAFF_ROLE ,
+            'role' => 'required',
+        ]);
+
+        $user = $this->model->findOrFail($id);
+        $user->update([
+            'nomor_karyawan' => $request->nomor_karyawan,
+            'status' => $request->status,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'password' => !is_null($request->password) && $request->password !== '' ? Hash::make($request->password) : $user->password,
+            'id_manager' => $request->id_manager,
+            'role' => $request->role
+        ]);
+        return $user->refresh();
 
     }
 
@@ -73,6 +139,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return User::destroy($id);
+        return $this->model->destroy($id);
     }
 }

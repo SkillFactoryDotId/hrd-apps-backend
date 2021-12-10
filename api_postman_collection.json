@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "b1efb4f1-22f5-42bc-909c-fb06a151a055",
+		"name": "HRD Apps Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTEzNzUxNi0wNWU2LTQ0NjUtYWEzYi0zOGRmZDc0MDljYzciLCJqdGkiOiI0ZWY1YTk2NWJjYmNhYWE4MzQyOGU2NDRkODdhZTE1MzU3NDEyYTk3ZDdlMmRmZDg3NjA2N2VmNjhjY2VkNzNmYzQ5YjcxYjIwMDg0OTM5OCIsImlhdCI6MTYzOTEwODc0Mi41MTE2NjYsIm5iZiI6MTYzOTEwODc0Mi41MTE2NywiZXhwIjoxNjcwNjQ0NzQyLjQ5MTA1OSwic3ViIjoiOTUxMzc5NTQtZmVjMi00MzZjLTllN2EtMWNmNWI2ZDk1MWYzIiwic2NvcGVzIjpbXX0.PU7iIHCMtrq97_bfaiGEJA0wkfmpbNG5Ln7cMJOpy9P7lrqrIKRjFbfUUn_u3hV3PGRUyhvZLYC-_Q3ArPLri8AudyTF4KeWqH_Piy3nkmV592SCWIx0Grq4HqVyXHnQ0Uy47Ltk4-w9eTIM7D86bu3DlvyaAYK-4ZxYM-fnf7gtEesdLPyuZX5XaZfvyS6_10qmHXCE3OsfvRdgI0Zj_T1pBCALviA8i9xe-UaOamy6Q7l3vC1zTktD7c9qCHTGemlP7VKJFieVnLiiDxYkq9DqUZsf6QxXluV0heaCblj0T7q6cqrlVXZbdsTLZqKISXwHgg23wnhJdmkHd0gs0IbiZvm-2fU4eqXHD0N8Up03cF0yrp8SoSYidHOe0ULt0r8B8dHAA3Y2BGPDZuY90j10ikN6uGVsONAeSZnMcB_6z5GKWyHXuP29lZ7Hpm0xHalpvvWNbYQsYtW6BwXYbhzzKBWFIAAWgJ6mHTD6dorRdBdfm2MS6my-TGWTPvAYYjf5sls44KBqMgFocBotYnGtVTF3AmH7AWDir0W-LAbTYQ3yZmAn7ScLc9YtemP3Ac79yRk4beo_1S57aaG5xw6zchUVxTsDn7iA77lz2h4_E850JyX70tpVL_4fb4i7cMc1JSojtKYjXH9PJyd58EVhBUIK4YZ4LB9vp1v2Yy8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomor_karyawan\": \"NIP03111\",\n    \"status\": \"aktif\",\n    \"name\": \"Syeikh Bin Bawazier\",\n    \"email\": \"syeikhbawazier@gmail.com\",\n    \"phone_number\": \"+6282367112133\",\n    \"password\": \"123456\",\n    \"role\": \"manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTEzNzUxNi0wNWU2LTQ0NjUtYWEzYi0zOGRmZDc0MDljYzciLCJqdGkiOiI0ZWY1YTk2NWJjYmNhYWE4MzQyOGU2NDRkODdhZTE1MzU3NDEyYTk3ZDdlMmRmZDg3NjA2N2VmNjhjY2VkNzNmYzQ5YjcxYjIwMDg0OTM5OCIsImlhdCI6MTYzOTEwODc0Mi41MTE2NjYsIm5iZiI6MTYzOTEwODc0Mi41MTE2NywiZXhwIjoxNjcwNjQ0NzQyLjQ5MTA1OSwic3ViIjoiOTUxMzc5NTQtZmVjMi00MzZjLTllN2EtMWNmNWI2ZDk1MWYzIiwic2NvcGVzIjpbXX0.PU7iIHCMtrq97_bfaiGEJA0wkfmpbNG5Ln7cMJOpy9P7lrqrIKRjFbfUUn_u3hV3PGRUyhvZLYC-_Q3ArPLri8AudyTF4KeWqH_Piy3nkmV592SCWIx0Grq4HqVyXHnQ0Uy47Ltk4-w9eTIM7D86bu3DlvyaAYK-4ZxYM-fnf7gtEesdLPyuZX5XaZfvyS6_10qmHXCE3OsfvRdgI0Zj_T1pBCALviA8i9xe-UaOamy6Q7l3vC1zTktD7c9qCHTGemlP7VKJFieVnLiiDxYkq9DqUZsf6QxXluV0heaCblj0T7q6cqrlVXZbdsTLZqKISXwHgg23wnhJdmkHd0gs0IbiZvm-2fU4eqXHD0N8Up03cF0yrp8SoSYidHOe0ULt0r8B8dHAA3Y2BGPDZuY90j10ikN6uGVsONAeSZnMcB_6z5GKWyHXuP29lZ7Hpm0xHalpvvWNbYQsYtW6BwXYbhzzKBWFIAAWgJ6mHTD6dorRdBdfm2MS6my-TGWTPvAYYjf5sls44KBqMgFocBotYnGtVTF3AmH7AWDir0W-LAbTYQ3yZmAn7ScLc9YtemP3Ac79yRk4beo_1S57aaG5xw6zchUVxTsDn7iA77lz2h4_E850JyX70tpVL_4fb4i7cMc1JSojtKYjXH9PJyd58EVhBUIK4YZ4LB9vp1v2Yy8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomor_karyawan\": \"NIP03111\",\n    \"status\": \"aktif\",\n    \"name\": \"Syeikh Bin Bawazier\",\n    \"email\": \"syeikhbawazier@gmail.com\",\n    \"phone_number\": \"+6282367112133\",\n    \"role\": \"manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/95136de1-ff4e-4f0c-a078-cecb76225cf9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"95136de1-ff4e-4f0c-a078-cecb76225cf9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get detail of user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTEzNzUxNi0wNWU2LTQ0NjUtYWEzYi0zOGRmZDc0MDljYzciLCJqdGkiOiJmNGQ5ZTEyMGIwMWRhMWY3ODk3ODM0YjZiZWExOTA5NzgwODQ3MjYyMzc1MGI5NzU1MTBhOGIzMmRiOTY1OTEzZWY5NDI5MTFmZmFiMzRkOCIsImlhdCI6MTYzOTEwODQ0NC43NTc1NzQsIm5iZiI6MTYzOTEwODQ0NC43NTc1NzksImV4cCI6MTY3MDY0NDQ0NC42NTY4MDIsInN1YiI6Ijk1MTM3NmEwLTg1MjUtNDUzMi1iYjY1LTBkN2JmOTkzZTU4MyIsInNjb3BlcyI6W119.I5fLVi6ScIdraKiFfveBq3BtNk6eUNPRELatdDwkJ8q7AiFboOgumdsmbyHyuTu1ZpRA4EfFap944M669IC2G-oUGY3H7N7hwAGpp6OoWnCprv-3MMAXGYCPPc3bJlQo0wcfdOjk3o3TmqoTR-NyJqCSLvmIylm0X4VDVn7tM1QTNZOZaf_2weBoxN1E1TyNsXCb86OD4quChcBdIo4efN5ottd9xcynObjZ1k8Jn0kymwgs4AhWTsX71SNgxstjZWryqlQCDew3ihaNXS51_DPsMadAxEagVVv9zMHUywB9uaR0IX3NFXdnp5hVi0CeWolahV0cQA7YvBPIYoI_xtdb-M01O2rLunC2UhcT07orPIB8CC6-ul_7rp-Ay1RrNCaZfB7dXwa8D2EACD__sQHD4Cts2qQCchhD6rvDEiVekibYFD0xfwjLRWfxn7PV_4lJ_oKFOOUri1-ldAxbrECoyeZELJM11oQCGgeR_nmT7nrVRbJRp508kib4tfoPaD4_RctzpzvkCp1HCmE2LZh9VORpgBFZaX_AJsrqsq9uYzyVYOy_3kvVcjxTm1pF2pJQRaEoBY92e8Ir3lHjjP5wjSPnLte9lp2Emy3UoU8YX4i0tHfCzfp_N8lPGDeEO5aQNgsGPPpa_znMTX2i4XZDw2ycMjIFGf9CMwPeQT4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomor_karyawan\": \"NIP03111\",\n    \"status\": \"aktif\",\n    \"name\": \"Reza D\",\n    \"email\": \"daulayreza@gmail.com\",\n    \"phone_number\": \"123456\",\n    \"password\": \"password\",\n    \"role\": \"hrd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/95136de1-ff4e-4f0c-a078-cecb76225cf9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"95136de1-ff4e-4f0c-a078-cecb76225cf9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTEzNzUxNi0wNWU2LTQ0NjUtYWEzYi0zOGRmZDc0MDljYzciLCJqdGkiOiI0ZWY1YTk2NWJjYmNhYWE4MzQyOGU2NDRkODdhZTE1MzU3NDEyYTk3ZDdlMmRmZDg3NjA2N2VmNjhjY2VkNzNmYzQ5YjcxYjIwMDg0OTM5OCIsImlhdCI6MTYzOTEwODc0Mi41MTE2NjYsIm5iZiI6MTYzOTEwODc0Mi41MTE2NywiZXhwIjoxNjcwNjQ0NzQyLjQ5MTA1OSwic3ViIjoiOTUxMzc5NTQtZmVjMi00MzZjLTllN2EtMWNmNWI2ZDk1MWYzIiwic2NvcGVzIjpbXX0.PU7iIHCMtrq97_bfaiGEJA0wkfmpbNG5Ln7cMJOpy9P7lrqrIKRjFbfUUn_u3hV3PGRUyhvZLYC-_Q3ArPLri8AudyTF4KeWqH_Piy3nkmV592SCWIx0Grq4HqVyXHnQ0Uy47Ltk4-w9eTIM7D86bu3DlvyaAYK-4ZxYM-fnf7gtEesdLPyuZX5XaZfvyS6_10qmHXCE3OsfvRdgI0Zj_T1pBCALviA8i9xe-UaOamy6Q7l3vC1zTktD7c9qCHTGemlP7VKJFieVnLiiDxYkq9DqUZsf6QxXluV0heaCblj0T7q6cqrlVXZbdsTLZqKISXwHgg23wnhJdmkHd0gs0IbiZvm-2fU4eqXHD0N8Up03cF0yrp8SoSYidHOe0ULt0r8B8dHAA3Y2BGPDZuY90j10ikN6uGVsONAeSZnMcB_6z5GKWyHXuP29lZ7Hpm0xHalpvvWNbYQsYtW6BwXYbhzzKBWFIAAWgJ6mHTD6dorRdBdfm2MS6my-TGWTPvAYYjf5sls44KBqMgFocBotYnGtVTF3AmH7AWDir0W-LAbTYQ3yZmAn7ScLc9YtemP3Ac79yRk4beo_1S57aaG5xw6zchUVxTsDn7iA77lz2h4_E850JyX70tpVL_4fb4i7cMc1JSojtKYjXH9PJyd58EVhBUIK4YZ4LB9vp1v2Yy8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/users/95136de1-ff4e-4f0c-a078-cecb76225cf9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"95136de1-ff4e-4f0c-a078-cecb76225cf9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"access_token\", data.access_token);",
+									"postman.setEnvironmentVariable(\"refresh_token\", data.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grant_type\":\"password\",\n    \"client_id\":\"95137516-05e6-4465-aa3b-38dfd7409cc7\",\n    \"client_secret\":\"6QMGc3emAm8OJ4XUNi3a9GO41JqaZ6Pfa5gUOZ06\",\n    \"username\":\"syeikhbawazier@gmail.com\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
