@@ -11,6 +11,7 @@ Repo ini merupakan API dari aplikasi HRD dengan fitur:
 ## Langkah Instalasi
 - Lalu, sesuaikan konfigurasi anda dengan membuat file `.env`, silahkan contoh file `.env.example`
 - Masuk ke direktori lalu jalankan command `php composer intall`
+- jalankan `php artisan passport:keys`
 - jalankan command `php artisan passport:client --password`. Simpan *Client ID* & *Client secret* yang muncul di layar
 
 ## Menjalankan aplikasi
